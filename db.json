@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "description": "This is product 1",
+      "image": "https://example.com/product1.jpg",
+      "price": 100
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "description": "This is product 2",
+      "image": "https://example.com/product2.jpg",
+      "price": 200
+    },
+    {
+      "name": "new pro",
+      "description": "new pro",
+      "price": "123123",
+      "id": 3
+    }
+  ],
+  "users": []
+}
