@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "name": "Product 1",
+      "name": "Product 233",
       "description": "This is product 1",
       "image": "https://example.com/product1.jpg",
       "price": 100
@@ -19,6 +19,145 @@
       "description": "new pro",
       "price": "123123",
       "id": 3
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Develop Mobile App Prototype",
+      "description": "In this task, you will lead the development of a mobile app prototype based on the product requirements and design specifications.",
+      "dueDate": "2024-11-10T05:25:44.051Z",
+      "createdAt": "2024-09-08T15:31:33.223Z",
+      "updatedAt": "2025-07-04T04:17:55.840Z",
+      "completed": false,
+      "stageId": null,
+      "users": [
+        {
+          "id": 5,
+          "name": "Dwight Schrute",
+          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Design User Interface for Web Application",
+      "description": "In this task, you will create a user-friendly and visually appealing user interface (UI) for our web application.",
+      "dueDate": "2024-11-10T05:25:44.051Z",
+      "createdAt": "2024-09-08T15:31:33.223Z",
+      "updatedAt": "2025-07-04T04:17:55.840Z",
+      "completed": false,
+      "stageId": 2,
+      "users": [
+        {
+          "id": 5,
+          "name": "Dwight Schrute",
+          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Implement Backend API for Mobile App",
+      "description": "In this task, you will develop the backend API for our mobile app, ensuring it meets the functional and performance requirements.",
+      "dueDate": "2024-11-10T05:25:44.051Z",
+      "createdAt": "2024-09-08T15:31:33.223Z",
+      "updatedAt": "2025-07-04T04:17:55.840Z",
+      "completed": false,
+      "stageId": 3,
+      "users": [
+        {
+          "id": 5,
+          "name": "Dwight Schrute",
+          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Conduct Code Review for Mobile App",
+      "description": "In this task, you will review the codebase of our mobile app to ensure it meets the coding standards and best practices.",
+      "dueDate": "2024-11-10T05:25:44.051Z",
+      "createdAt": "2024-09-08T15:31:33.223Z",
+      "updatedAt": "2025-07-04T04:17:55.840Z",
+      "completed": false,
+      "stageId": 4,
+      "users": [
+        {
+          "id": 5,
+          "name": "Dwight Schrute",
+          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Deploy Mobile App to Production",
+      "description": "In this task, you will deploy our mobile app to the production environment, ensuring it is ready for public use.",
+      "dueDate": "2024-11-10T05:25:44.051Z",
+      "createdAt": "2024-09-08T15:31:33.223Z",
+      "updatedAt": "2025-07-04T04:17:55.840Z",
+      "completed": false,
+      "stageId": null,
+      "users": [
+        {
+          "id": 5,
+          "name": "Dwight Schrute",
+          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Test Mobile App Functionality",
+      "description": "In this task, you will test the functionality of our mobile app to ensure it meets the requirements and provides a seamless user experience.",
+      "dueDate": "2024-11-10T05:25:44.051Z",
+      "createdAt": "2024-09-08T15:31:33.223Z",
+      "updatedAt": "2025-07-04T04:17:55.840Z",
+      "completed": false,
+      "stageId": 2,
+      "users": [
+        {
+          "id": 5,
+          "name": "Dwight Schrute",
+          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Gather User Feedback on Mobile App",
+      "description": "In this task, you will gather user feedback on our mobile app to identify areas for improvement and enhance the user experience.",
+      "dueDate": "2024-11-10T05:25:44.051Z",
+      "createdAt": "2024-09-08T15:31:33.223Z",
+      "updatedAt": "2025-07-04T04:17:55.840Z",
+      "completed": false,
+      "stageId": 1,
+      "users": [
+        {
+          "id": 5,
+          "name": "Dwight Schrute",
+          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
+        }
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": 1,
+      "title": "TODO"
+    },
+    {
+      "id": 2,
+      "title": "In Progress"
+    },
+    {
+      "id": 3,
+      "title": "Review"
+    },
+    {
+      "id": 4,
+      "title": "Done"
     }
   ],
   "users": []

@@ -49,11 +49,12 @@ import {
   ProductList,
   ProductShow,
 } from "./pages/products";
+import { ProductOutlined } from "@ant-design/icons";
+import TasksListPage from "./tasks";
 
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <AntdApp>
@@ -72,6 +73,18 @@ function App() {
                     show: "/products/show/:id",
                     meta: {
                       canDelete: true,
+                      icon: <ProductOutlined />,
+                    },
+                  },
+                  {
+                    name: "tasks",
+                    list: "/tasks",
+                    create: "/tasks/create",
+                    edit: "/tasks/edit/:id",
+                    show: "/tasks/show/:id",
+                    meta: {
+                      canDelete: true,
+                      icon: <ProductOutlined />,
                     },
                   },
                   //   {
@@ -127,6 +140,12 @@ function App() {
                       <Route path="create" element={<ProductCreate />} />
                       <Route path="edit/:id" element={<ProductEdit />} />
                       <Route path="show/:id" element={<ProductShow />} />
+                    </Route>
+                    <Route path="/tasks">
+                      <Route index element={<TasksListPage />} />
+                      {/* <Route path="create" element={<TaskCreate />} />
+                      <Route path="edit/:id" element={<TaskEdit />} />
+                      <Route path="show/:id" element={<TaskShow />} /> */}
                     </Route>
                     {/* <Route path="/blog-posts">
                       <Route index element={<BlogPostList />} />
