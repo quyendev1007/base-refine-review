@@ -30,7 +30,7 @@
       "createdAt": "2024-09-08T15:31:33.223Z",
       "updatedAt": "2025-07-04T04:17:55.840Z",
       "completed": false,
-      "stageId": null,
+      "stageId": 3,
       "users": [
         {
           "id": 5,
@@ -47,7 +47,7 @@
       "createdAt": "2024-09-08T15:31:33.223Z",
       "updatedAt": "2025-07-04T04:17:55.840Z",
       "completed": false,
-      "stageId": 2,
+      "stageId": 1,
       "users": [
         {
           "id": 5,
@@ -132,7 +132,7 @@
       "createdAt": "2024-09-08T15:31:33.223Z",
       "updatedAt": "2025-07-04T04:17:55.840Z",
       "completed": false,
-      "stageId": 1,
+      "stageId": null,
       "users": [
         {
           "id": 5,
@@ -140,6 +140,36 @@
           "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
         }
       ]
+    },
+    {
+      "title": "new 01",
+      "description": "mota",
+      "dueDate": "2025-07-25",
+      "stageId": 1,
+      "userIds": [],
+      "id": 9
+    },
+    {
+      "title": "new 002 edit ",
+      "description": "new description",
+      "dueDate": "2025-07-18",
+      "stageId": 1,
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-04T12:10:45.956Z",
+      "updatedAt": "2025-07-04T12:10:45.956Z",
+      "id": 10
+    },
+    {
+      "title": "new 003",
+      "description": "new description 003",
+      "dueDate": "2025-07-18",
+      "stageId": 2,
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-04T12:13:50.657Z",
+      "updatedAt": "2025-07-04T12:13:50.657Z",
+      "id": 11
     }
   ],
   "stages": [
