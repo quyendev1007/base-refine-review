@@ -72,18 +72,15 @@ export const ProjectCard = ({
         icon: <DeleteOutlined />,
         onClick: () => {
           mutate({
-            resource: "tasks",
             id,
-            meta: {
-              operation: "task",
-            },
+            resource: "tasks",
           });
         },
       },
     ];
 
     return dropdownItems;
-  }, []);
+  }, [edit, id, mutate]);
 
   const dueDateOptions = useMemo(() => {
     if (!dueDate) return null;

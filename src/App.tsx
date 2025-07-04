@@ -51,6 +51,8 @@ import {
 } from "./pages/products";
 import { ProductOutlined } from "@ant-design/icons";
 import TasksListPage from "./tasks";
+import { TasksCreatePage } from "./tasks/create";
+import { TasksEditPage } from "./tasks/edit";
 
 function App() {
   return (
@@ -79,7 +81,7 @@ function App() {
                   {
                     name: "tasks",
                     list: "/tasks",
-                    create: "/tasks/create",
+                    create: "/tasks/new",
                     edit: "/tasks/edit/:id",
                     show: "/tasks/show/:id",
                     meta: {
@@ -143,8 +145,10 @@ function App() {
                     </Route>
                     <Route path="/tasks">
                       <Route index element={<TasksListPage />} />
-                      {/* <Route path="create" element={<TaskCreate />} />
-                      <Route path="edit/:id" element={<TaskEdit />} />
+                      <Route path="new" element={<TasksCreatePage />} />
+                      <Route path="edit/:id" element={<TasksEditPage />} />
+                      {/*
+
                       <Route path="show/:id" element={<TaskShow />} /> */}
                     </Route>
                     {/* <Route path="/blog-posts">
