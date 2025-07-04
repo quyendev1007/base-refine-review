@@ -145,7 +145,7 @@
       "title": "new 01",
       "description": "mota",
       "dueDate": "2025-07-25",
-      "stageId": 1,
+      "stageId": null,
       "userIds": [],
       "id": 9
     },
@@ -170,6 +170,28 @@
       "createdAt": "2025-07-04T12:13:50.657Z",
       "updatedAt": "2025-07-04T12:13:50.657Z",
       "id": 11
+    },
+    {
+      "title": "new card",
+      "description": "description card",
+      "dueDate": "2025-07-25",
+      "stageId": 1,
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-04T12:20:20.218Z",
+      "updatedAt": "2025-07-04T12:20:20.218Z",
+      "id": 12
+    },
+    {
+      "title": "new card lkjashjkdkasdkljaskdllk",
+      "description": "asdkasdjkl",
+      "dueDate": "2025-07-18",
+      "stageId": 2,
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-04T12:20:46.411Z",
+      "updatedAt": "2025-07-04T12:20:46.411Z",
+      "id": 13
     }
   ],
   "stages": [

@@ -33,6 +33,7 @@ interface IStage {
 const TasksListPage = ({ children }: React.PropsWithChildren) => {
   const { data: tasks, isLoading: isLoadingTasks } = useList<ITask, HttpError>({
     resource: "tasks",
+    pagination: { current: 1, pageSize: 100 },
   });
   const { data: stages, isLoading: isLoadingStages } = useList<
     IStage,
