@@ -135,7 +135,7 @@ function App() {
                   >
                     <Route
                       index
-                      element={<NavigateToResource resource="products" />}
+                      element={<NavigateToResource resource="tasks" />}
                     />
                     <Route path="/products">
                       <Route index element={<ProductList />} />
