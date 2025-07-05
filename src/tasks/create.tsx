@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router";
 import { useModalForm } from "@refinedev/antd";
 import { useNavigation } from "@refinedev/core";
 
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Modal, Space } from "antd";
 
 export const TasksCreatePage = () => {
   const [searchParams] = useSearchParams();
@@ -50,9 +50,22 @@ export const TasksCreatePage = () => {
         >
           <Input.TextArea />
         </Form.Item>
-        <Form.Item label="DueDate" name="dueDate" rules={[{ required: true }]}>
-          <Input type="date" />
-        </Form.Item>
+        <Space>
+          <Form.Item
+            label="Start Date"
+            name="startDate"
+            rules={[{ required: true }]}
+          >
+            <Input type="date" />
+          </Form.Item>
+          <Form.Item
+            label="End Date"
+            name="endDate"
+            rules={[{ required: true }]}
+          >
+            <Input type="date" />
+          </Form.Item>
+        </Space>
       </Form>
     </Modal>
   );
