@@ -13,67 +13,18 @@
       "role": "Student"
     }
   ],
-  "semesters": [
-    {
-      "id": "s1",
-      "name": "Spring",
-      "startDate": "2025-01-01",
-      "endDate": "2025-05-31",
-      "description": "Kỳ học mùa xuân",
-      "status": "Completed",
-      "blocks": [
-        {
-          "name": "Block 1"
-        },
-        {
-          "name": "Block 2"
-        }
-      ]
-    },
-    {
-      "id": "s2",
-      "name": "Summer",
-      "startDate": "2025-06-01",
-      "endDate": "2025-08-31",
-      "description": "Kỳ học mùa hè",
-      "status": "Completed",
-      "blocks": [
-        {
-          "name": "Block 1"
-        },
-        {
-          "name": "Block 2"
-        }
-      ]
-    },
-    {
-      "id": "s3",
-      "name": "Fall",
-      "startDate": "2025-09-01",
-      "endDate": "2025-12-31",
-      "description": "Kỳ học mùa thu",
-      "status": "Completed",
-      "blocks": [
-        {
-          "name": "Block 1"
-        },
-        {
-          "name": "Block 2"
-        }
-      ]
-    }
-  ],
+  "semesters": [],
   "tasks": [
     {
       "id": "t1",
       "title": "Chuẩn bị tài liệu môn học",
       "description": "Tài liệu dành cho tuần 1",
       "startDate": "2025-01-15",
-      "endDate": "2025-01-15",
+      "endDate": "2025-01-26",
       "priority": "medium",
       "status": "Completed",
       "createdBy": "u2",
-      "semesterId": "s1",
+      "semester": "2025-Spring",
       "blockName": "Block 1",
       "file": "https://example.com/week1.pdf",
       "link": "https://example.com/lecture1",
@@ -99,16 +50,73 @@
     {
       "title": "abc",
       "description": "abc",
-      "startDate": "2025-07-05",
+      "startDate": "2025-07-13",
       "endDate": "2025-07-06",
-      "stageId": "st2",
+      "stageId": "st3",
       "userIds": [],
       "complete": false,
       "createdAt": "2025-07-05T08:09:23.038Z",
       "updatedAt": "2025-07-05T08:09:23.038Z",
       "id": "M1iVxnn",
       "priority": "low",
-      "semesterId": "s1"
+      "semester": "2025-Summer",
+      "estimate": "40",
+      "assignees": [
+        {
+          "userId": "u2",
+          "response": "",
+          "progress": 0
+        }
+      ]
+    },
+    {
+      "title": "cong viec",
+      "description": "mo ta",
+      "startDate": "2026-01-03",
+      "endDate": "2026-09-20",
+      "estimate": "40",
+      "semester": "2026-Summer",
+      "assignees": [
+        {
+          "userId": "u1",
+          "response": "",
+          "progress": 0
+        },
+        {
+          "userId": "u2",
+          "response": "",
+          "progress": 0
+        }
+      ],
+      "priority": "medium",
+      "stageId": null,
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-06T03:58:15.468Z",
+      "updatedAt": "2025-07-06T03:58:15.468Z",
+      "id": "MjlbYkv"
+    },
+    {
+      "title": "abc",
+      "description": "abc",
+      "startDate": "2025-06-14",
+      "endDate": "2025-07-20",
+      "estimate": "40",
+      "semester": "2025-Summer",
+      "assignees": [
+        {
+          "userId": "u1",
+          "response": "",
+          "progress": 0
+        }
+      ],
+      "priority": "low",
+      "stageId": "st3",
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-06T04:07:11.782Z",
+      "updatedAt": "2025-07-06T04:07:11.782Z",
+      "id": "9cje9K9"
     }
   ],
   "notifications": [

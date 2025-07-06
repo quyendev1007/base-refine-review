@@ -17,6 +17,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import type { SelectProps } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { TaskFormValues } from "../types/Task";
 
 interface ISemester {
   id: string;
@@ -40,43 +41,62 @@ export const TasksEditPage = () => {
     meta: {},
   });
 
-  const { data: semesters, isLoading: isLoadingStages } = useList<
-    ISemester,
-    HttpError
-  >({
-    resource: "semesters",
-  });
-  console.log("semesters", semesters);
+  // Hàm xác định kỳ học dựa trên tháng
+  const getSemesterFromMonth = (month: number) => {
+    if (month >= 1 && month <= 4) return "Spring";
+    if (month >= 5 && month <= 9) return "Summer";
+    return "Fall";
+  };
 
-  const [defaultSemesterId, setDefaultSemesterId] = useState<
-    string | undefined
-  >(undefined);
-
-  useEffect(() => {
-    if (!semesters?.data) return;
-
-    const now = new Date();
-    const current = semesters.data.find((s) => {
-      const start = new Date(s.startDate);
-      const end = new Date(s.endDate);
-      return now >= start && now <= end;
-    });
-
-    setDefaultSemesterId(current?.id);
-  }, [semesters]);
+  // Hàm xác định kỳ học dựa trên ngày
+  const getSemesterFromDate = (dateString: string) => {
+    if (!dateString) return null;
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const season = getSemesterFromMonth(month);
+    return `${year}-${season}`;
+  };
 
   const semesterSelectProps = useMemo(() => {
-    return {
-      options:
-        semesters?.data.map((s) => {
-          const year = new Date(s.startDate).getFullYear();
-          return {
-            label: `${s.name} ${year}`,
-            value: s.id,
-          };
-        }) || [],
-    };
-  }, [semesters]);
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const nextYear = currentYear + 1;
+
+    const seasons = [
+      { name: "Spring", month: 1 },
+      { name: "Summer", month: 5 },
+      { name: "Fall", month: 9 },
+    ];
+
+    const options: { label: string; value: string }[] = [];
+
+    for (const { name, month } of seasons) {
+      const semesterDate = new Date(currentYear, month - 1, 1);
+      if (semesterDate >= new Date(currentYear, now.getMonth(), 1)) {
+        options.push({
+          label: `${name} ${currentYear}`,
+          value: `${currentYear}-${name}`,
+        });
+      }
+    }
+
+    for (const { name } of seasons) {
+      options.push({
+        label: `${name} ${nextYear}`,
+        value: `${nextYear}-${name}`,
+      });
+    }
+
+    return { options };
+  }, []);
+
+  const defaultSemesterValue = useMemo(() => {
+    const month = new Date().getMonth() + 1;
+    const year = new Date().getFullYear();
+    const season = getSemesterFromMonth(month);
+    return `${year}-${season}`;
+  }, []);
 
   const { data: users } = useList({
     resource: "users",
@@ -131,6 +151,32 @@ export const TasksEditPage = () => {
             (a: any) => a.userId
           ),
         }}
+        onValuesChange={(
+          changedValues: Partial<TaskFormValues>,
+          allValues: TaskFormValues
+        ) => {
+          // Tự động cập nhật kỳ học khi thay đổi ngày bắt đầu hoặc kết thúc
+          if (changedValues.startDate || changedValues.endDate) {
+            const form = formProps?.form;
+            if (!form) return;
+
+            // Ưu tiên ngày bắt đầu, nếu không có thì dùng ngày kết thúc
+            const dateToUse = changedValues.startDate || changedValues.endDate;
+
+            if (dateToUse) {
+              const newSemester = getSemesterFromDate(dateToUse);
+
+              if (newSemester) {
+                // Sử dụng setTimeout để đảm bảo cập nhật sau khi form đã render
+                setTimeout(() => {
+                  form.setFieldsValue({
+                    semester: newSemester,
+                  });
+                }, 0);
+              }
+            }
+          }
+        }}
       >
         <Card size="small" title="Thông tin cơ bản">
           <Form.Item
@@ -183,19 +229,8 @@ export const TasksEditPage = () => {
             </Col>
           </Row>
 
-          <Form.Item
-            label="Kỳ học"
-            name="semesterId"
-            initialValue={
-              formProps?.initialValues?.semesterId ?? defaultSemesterId
-            }
-            rules={[{ required: true }]}
-          >
-            <Select
-              loading={isLoadingStages}
-              placeholder="Chọn kỳ học"
-              {...semesterSelectProps}
-            />
+          <Form.Item label="Kỳ học" name="semester">
+            <Select placeholder="Chọn kỳ học" {...semesterSelectProps} />
           </Form.Item>
         </Card>
 
