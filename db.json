@@ -16,12 +16,51 @@
   "semesters": [
     {
       "id": "s1",
-      "name": "Học kỳ 1 - 2025",
-      "startDate": "2025-01-10",
-      "endDate": "2025-05-20",
+      "name": "Spring",
+      "startDate": "2025-01-01",
+      "endDate": "2025-05-31",
       "description": "Kỳ học mùa xuân",
       "status": "Completed",
-      "blocks": [{ "name": "Block 1" }, { "name": "Block 2" }]
+      "blocks": [
+        {
+          "name": "Block 1"
+        },
+        {
+          "name": "Block 2"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "name": "Summer",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
+      "description": "Kỳ học mùa hè",
+      "status": "Completed",
+      "blocks": [
+        {
+          "name": "Block 1"
+        },
+        {
+          "name": "Block 2"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "name": "Fall",
+      "startDate": "2025-09-01",
+      "endDate": "2025-12-31",
+      "description": "Kỳ học mùa thu",
+      "status": "Completed",
+      "blocks": [
+        {
+          "name": "Block 1"
+        },
+        {
+          "name": "Block 2"
+        }
+      ]
     }
   ],
   "tasks": [
@@ -29,21 +68,47 @@
       "id": "t1",
       "title": "Chuẩn bị tài liệu môn học",
       "description": "Tài liệu dành cho tuần 1",
-      "deadline": "2025-01-15T23:59:59Z",
-      "priority": "High",
+      "startDate": "2025-01-15",
+      "endDate": "2025-01-15",
+      "priority": "medium",
       "status": "Completed",
-      "assignedTo": "u1",
       "createdBy": "u2",
       "semesterId": "s1",
       "blockName": "Block 1",
-      "attachment": "https://example.com/week1.pdf",
+      "file": "https://example.com/week1.pdf",
+      "link": "https://example.com/lecture1",
       "assignees": [
         {
+          "response": "",
+          "progress": 0
+        },
+        {
+          "userId": "u1",
+          "response": "",
+          "progress": 0
+        },
+        {
           "userId": "u2",
-          "response": "Đã nhận",
-          "progress": 100
+          "response": "",
+          "progress": 0
         }
-      ]
+      ],
+      "stageId": "st1",
+      "estimate": "40"
+    },
+    {
+      "title": "abc",
+      "description": "abc",
+      "startDate": "2025-07-05",
+      "endDate": "2025-07-06",
+      "stageId": "st2",
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-05T08:09:23.038Z",
+      "updatedAt": "2025-07-05T08:09:23.038Z",
+      "id": "M1iVxnn",
+      "priority": "low",
+      "semesterId": "s1"
     }
   ],
   "notifications": [
@@ -57,9 +122,18 @@
     }
   ],
   "stages": [
-    { "id": "st1", "title": "Chờ xử lý" },
-    { "id": "st2", "title": "Đang thực hiện" },
-    { "id": "st3", "title": "Hoàn thành" }
+    {
+      "id": "st1",
+      "title": "Chờ xử lý"
+    },
+    {
+      "id": "st2",
+      "title": "Đang thực hiện"
+    },
+    {
+      "id": "st3",
+      "title": "Hoàn thành"
+    }
   ],
   "activities": [
     {
