@@ -14,3 +14,16 @@ export interface ITask {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface TaskFormValues {
+  title?: string;
+  description?: string;
+  startDate?: string;
+  endDate?: string;
+  estimate?: string;
+  semesterId?: string;
+  assignees?: string[];
+  priority?: string;
+  link?: string;
+  file?: any;
+}
