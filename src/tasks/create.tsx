@@ -112,7 +112,7 @@ export const TasksCreatePage = () => {
   };
 
   // tìm kiếm cho assignees
-  const [searchValue, setSearchValue] = useState("");
+
   type AssigneeOption = { userId: string; [key: string]: any };
   const [assigneeOptions, setAssigneeOptions] = useState<AssigneeOption[]>([]);
 
@@ -319,82 +319,110 @@ export const TasksCreatePage = () => {
         <Form.List
           name="subtasks"
           initialValue={[
-            { title: "", assignee: null, dueDate: "", priority: "medium" },
+            {
+              title: "",
+              assignee: null,
+              startDate: "",
+              endDate: "",
+              priority: "medium",
+            },
           ]}
         >
           {(fields) => (
             <>
-              <Typography.Text strong>Nhiệm vụ con</Typography.Text>
+              <Typography.Title level={5}>Nhiệm vụ con</Typography.Title>
               <div
                 style={{
-                  border: "1px solid #eee",
-                  borderRadius: 4,
-                  padding: 8,
+                  border: "1px solid #d9d9d9",
+                  borderRadius: 8,
+                  padding: 16,
+                  backgroundColor: "#fafafa",
                 }}
               >
-                {fields.map(({ key, name, ...restField }) => (
+                {fields.map(({ key, name }) => (
                   <div
                     key={key}
                     style={{
-                      marginBottom: 16,
-                      padding: 8,
-                      border: "1px dashed #d9d9d9",
-                      borderRadius: 4,
+                      marginBottom: 24,
+                      padding: 16,
+                      border: "1px dashed #d0d0d0",
+                      borderRadius: 8,
+                      backgroundColor: "#fff",
                     }}
                   >
-                    {/* Tiêu đề nhiệm vụ con */}
+                    {/* Title riêng dòng */}
                     <Form.Item
                       name={[name, "title"]}
-                      style={{ marginBottom: 8 }}
+                      style={{ marginBottom: 16 }}
+                      label="Tiêu đề nhiệm vụ"
                     >
-                      <Input placeholder="Nhập tên nhiệm vụ con" />
+                      <Input placeholder="Nhập tiêu đề nhiệm vụ con" />
                     </Form.Item>
 
-                    {/* Dòng chứa assignee, dueDate, priority */}
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr 1fr",
-                        gap: 8,
-                      }}
-                    >
-                      <Form.Item
-                        name={[name, "assignee"]}
-                        style={{ marginBottom: 0 }}
-                      >
-                        <Select
-                          showSearch
-                          placeholder="Tìm theo email"
-                          onSearch={(value) => debounceFetcher(value)}
-                          filterOption={false}
-                          options={assigneeOptions.map((user) => ({
-                            label: `${user.name} (${user.email})`,
-                            value: user.email,
-                          }))}
-                        />
-                      </Form.Item>
+                    {/* Dòng chứa các trường còn lại */}
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Form.Item
+                          label="Người thực hiện"
+                          name={[name, "assignee"]}
+                          rules={[]}
+                        >
+                          <Select
+                            showSearch
+                            placeholder="Chọn hoặc tìm theo email"
+                            optionFilterProp="label"
+                            filterOption={(input, option) =>
+                              (option?.label ?? "")
+                                .toLowerCase()
+                                .includes(input.toLowerCase())
+                            }
+                            options={users?.data?.map((user) => ({
+                              label: user.name + " (" + user.email + ")",
+                              value: user.id,
+                            }))}
+                          />
+                        </Form.Item>
+                      </Col>
 
-                      <Form.Item
-                        name={[name, "dueDate"]}
-                        style={{ marginBottom: 0 }}
-                      >
-                        <Input type="date" />
-                      </Form.Item>
+                      <Col span={6}>
+                        <Form.Item
+                          label="Ngày bắt đầu"
+                          name={[name, "startDate"]}
+                          rules={[]}
+                        >
+                          <Input type="date" />
+                        </Form.Item>
+                      </Col>
 
-                      <Form.Item
-                        name={[name, "priority"]}
-                        style={{ marginBottom: 0 }}
-                      >
-                        <Select
-                          placeholder="Mức độ ưu tiên"
-                          options={[
-                            { label: "Thấp", value: "low" },
-                            { label: "Trung bình", value: "medium" },
-                            { label: "Cao", value: "high" },
-                          ]}
-                        />
-                      </Form.Item>
-                    </div>
+                      <Col span={6}>
+                        <Form.Item
+                          label="Ngày kết thúc"
+                          name={[name, "endDate"]}
+                          rules={[]}
+                        >
+                          <Input type="date" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+
+                    <Row gutter={16}>
+                      <Col span={8}>
+                        <Form.Item
+                          label="Mức độ ưu tiên"
+                          name={[name, "priority"]}
+                          rules={[]}
+                        >
+                          <Select
+                            placeholder="Chọn mức độ"
+                            options={[
+                              { label: "Thấp", value: "low" },
+                              { label: "Trung bình", value: "medium" },
+                              { label: "Cao", value: "high" },
+                            ]}
+                          />
+                        </Form.Item>
+                      </Col>
+                    </Row>
                   </div>
                 ))}
               </div>

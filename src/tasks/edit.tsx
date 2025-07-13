@@ -13,6 +13,7 @@ import {
   Button,
   Card,
   Divider,
+  Typography,
 } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import type { SelectProps } from "antd";
@@ -135,6 +136,9 @@ export const TasksEditPage = () => {
   };
 
   const debounceFetcher = useMemo(() => debounce(fetchUsers, 400), []);
+  useEffect(() => {
+  fetchUsers(""); // nạp tất cả user để hiển thị được assignee đã lưu
+}, []);
 
   return (
     <Modal
@@ -338,44 +342,41 @@ export const TasksEditPage = () => {
         <Form.List name="subtasks">
           {(fields) => (
             <>
-              <Divider />
-              <Card size="small" title="Nhiệm vụ con">
-                <div
-                  style={{
-                    border: "1px solid #eee",
-                    borderRadius: 4,
-                    padding: 8,
-                  }}
-                >
-                  {fields.map(({ key, name, ...restField }) => (
-                    <div
-                      key={key}
-                      style={{
-                        marginBottom: 16,
-                        padding: 8,
-                        border: "1px dashed #d9d9d9",
-                        borderRadius: 4,
-                      }}
+              <Typography.Title level={5}>Nhiệm vụ con</Typography.Title>
+              <div
+                style={{
+                  border: "1px solid #d9d9d9",
+                  borderRadius: 8,
+                  padding: 16,
+                  backgroundColor: "#fafafa",
+                }}
+              >
+                {fields.map(({ key, name }) => (
+                  <div
+                    key={key}
+                    style={{
+                      marginBottom: 24,
+                      padding: 16,
+                      border: "1px dashed #d0d0d0",
+                      borderRadius: 8,
+                      backgroundColor: "#fff",
+                    }}
+                  >
+                    {/* Tiêu đề nhiệm vụ */}
+                    <Form.Item
+                      name={[name, "title"]}
+                      label="Tiêu đề nhiệm vụ"
+                      style={{ marginBottom: 16 }}
                     >
-                      {/* Tiêu đề nhiệm vụ con */}
-                      <Form.Item
-                        name={[name, "title"]}
-                        style={{ marginBottom: 8 }}
-                      >
-                        <Input placeholder="Nhập tên nhiệm vụ con" />
-                      </Form.Item>
+                      <Input placeholder="Nhập tiêu đề nhiệm vụ con" />
+                    </Form.Item>
 
-                      {/* Dòng chứa assignee, dueDate, priority */}
-                      <div
-                        style={{
-                          display: "grid",
-                          gridTemplateColumns: "1fr 1fr 1fr",
-                          gap: 8,
-                        }}
-                      >
+                    <Row gutter={16}>
+                      {/* Người thực hiện */}
+                      <Col span={12}>
                         <Form.Item
                           name={[name, "assignee"]}
-                          style={{ marginBottom: 0 }}
+                          label="Người thực hiện"
                         >
                           <Select
                             showSearch
@@ -384,24 +385,42 @@ export const TasksEditPage = () => {
                             filterOption={false}
                             options={assigneeOptions.map((user) => ({
                               label: `${user.name} (${user.email})`,
-                              value: user.email,
+                              value: user.email, // ✅ phải là email!
                             }))}
                           />
                         </Form.Item>
+                      </Col>
 
+                      {/* Ngày bắt đầu */}
+                      <Col span={6}>
                         <Form.Item
-                          name={[name, "dueDate"]}
-                          style={{ marginBottom: 0 }}
+                          name={[name, "startDate"]}
+                          label="Ngày bắt đầu"
                         >
                           <Input type="date" />
                         </Form.Item>
+                      </Col>
 
+                      {/* Ngày kết thúc */}
+                      <Col span={6}>
+                        <Form.Item
+                          name={[name, "endDate"]}
+                          label="Ngày kết thúc"
+                        >
+                          <Input type="date" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+
+                    <Row gutter={16}>
+                      {/* Mức độ ưu tiên */}
+                      <Col span={8}>
                         <Form.Item
                           name={[name, "priority"]}
-                          style={{ marginBottom: 0 }}
+                          label="Mức độ ưu tiên"
                         >
                           <Select
-                            placeholder="Mức độ ưu tiên"
+                            placeholder="Chọn mức độ"
                             options={[
                               { label: "Thấp", value: "low" },
                               { label: "Trung bình", value: "medium" },
@@ -409,11 +428,11 @@ export const TasksEditPage = () => {
                             ]}
                           />
                         </Form.Item>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
+                      </Col>
+                    </Row>
+                  </div>
+                ))}
+              </div>
             </>
           )}
         </Form.List>
