@@ -1,5 +1,5 @@
 import { useModalForm } from "@refinedev/antd";
-import { HttpError, useList, useNavigation } from "@refinedev/core";
+import { HttpError, useForm, useList, useNavigation } from "@refinedev/core";
 
 import {
   Col,
@@ -18,6 +18,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { SelectProps } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { TaskFormValues } from "../types/Task";
+import { debounce } from "lodash";
 
 interface ISemester {
   id: string;
@@ -35,7 +36,7 @@ interface Block {
 
 export const TasksEditPage = () => {
   const { list } = useNavigation();
-  const { formProps, modalProps, close } = useModalForm({
+  const { formProps, modalProps, close, queryResult } = useModalForm({
     action: "edit",
     defaultVisible: true,
     meta: {},
@@ -118,6 +119,22 @@ export const TasksEditPage = () => {
       { label: "High", value: "high" },
     ],
   };
+
+  interface UserOption {
+    id: string;
+    name: string;
+    email: string;
+  }
+
+  const [assigneeOptions, setAssigneeOptions] = useState<UserOption[]>([]);
+
+  const fetchUsers = async (query: string) => {
+    const res = await fetch(`http://localhost:3000/users?email_like=${query}`);
+    const data = await res.json();
+    setAssigneeOptions(data);
+  };
+
+  const debounceFetcher = useMemo(() => debounce(fetchUsers, 400), []);
 
   return (
     <Modal
@@ -316,6 +333,90 @@ export const TasksEditPage = () => {
             </Col>
           </Row>
         </Card>
+
+        {/* subtask */}
+        <Form.List name="subtasks">
+          {(fields) => (
+            <>
+              <Divider />
+              <Card size="small" title="Nhiệm vụ con">
+                <div
+                  style={{
+                    border: "1px solid #eee",
+                    borderRadius: 4,
+                    padding: 8,
+                  }}
+                >
+                  {fields.map(({ key, name, ...restField }) => (
+                    <div
+                      key={key}
+                      style={{
+                        marginBottom: 16,
+                        padding: 8,
+                        border: "1px dashed #d9d9d9",
+                        borderRadius: 4,
+                      }}
+                    >
+                      {/* Tiêu đề nhiệm vụ con */}
+                      <Form.Item
+                        name={[name, "title"]}
+                        style={{ marginBottom: 8 }}
+                      >
+                        <Input placeholder="Nhập tên nhiệm vụ con" />
+                      </Form.Item>
+
+                      {/* Dòng chứa assignee, dueDate, priority */}
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "1fr 1fr 1fr",
+                          gap: 8,
+                        }}
+                      >
+                        <Form.Item
+                          name={[name, "assignee"]}
+                          style={{ marginBottom: 0 }}
+                        >
+                          <Select
+                            showSearch
+                            placeholder="Tìm theo email"
+                            onSearch={(value) => debounceFetcher(value)}
+                            filterOption={false}
+                            options={assigneeOptions.map((user) => ({
+                              label: `${user.name} (${user.email})`,
+                              value: user.email,
+                            }))}
+                          />
+                        </Form.Item>
+
+                        <Form.Item
+                          name={[name, "dueDate"]}
+                          style={{ marginBottom: 0 }}
+                        >
+                          <Input type="date" />
+                        </Form.Item>
+
+                        <Form.Item
+                          name={[name, "priority"]}
+                          style={{ marginBottom: 0 }}
+                        >
+                          <Select
+                            placeholder="Mức độ ưu tiên"
+                            options={[
+                              { label: "Thấp", value: "low" },
+                              { label: "Trung bình", value: "medium" },
+                              { label: "Cao", value: "high" },
+                            ]}
+                          />
+                        </Form.Item>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </>
+          )}
+        </Form.List>
       </Form>
     </Modal>
   );

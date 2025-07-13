@@ -127,6 +127,36 @@
       "createdAt": "2025-07-06T04:07:11.782Z",
       "updatedAt": "2025-07-06T04:07:11.782Z",
       "id": "9cje9K9"
+    },
+    {
+      "title": "công việc 1",
+      "description": "làm mọi thứ",
+      "startDate": "2025-07-03",
+      "endDate": "2025-07-16",
+      "estimate": "16",
+      "semester": "2026-Summer",
+      "assignees": [
+        {
+          "userId": "u1",
+          "response": "",
+          "progress": 0
+        }
+      ],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "title": "công việc 2",
+          "assignee": "b@example.com",
+          "dueDate": "2025-07-23",
+          "priority": "medium"
+        }
+      ],
+      "stageId": null,
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-13T09:59:39.304Z",
+      "updatedAt": "2025-07-13T09:59:39.305Z",
+      "id": "o5b759R"
     }
   ],
   "notifications": [
