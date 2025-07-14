@@ -1,5 +1,5 @@
 import { useModalForm } from "@refinedev/antd";
-import { HttpError, useList, useNavigation } from "@refinedev/core";
+import { HttpError, useForm, useList, useNavigation } from "@refinedev/core";
 
 import {
   Col,
@@ -13,11 +13,13 @@ import {
   Button,
   Card,
   Divider,
+  Typography,
 } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import type { SelectProps } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { TaskFormValues } from "../types/Task";
+import { debounce } from "lodash";
 
 interface ISemester {
   id: string;
@@ -35,7 +37,7 @@ interface Block {
 
 export const TasksEditPage = () => {
   const { list } = useNavigation();
-  const { formProps, modalProps, close } = useModalForm({
+  const { formProps, modalProps, close, queryResult } = useModalForm({
     action: "edit",
     defaultVisible: true,
     meta: {},
@@ -118,6 +120,25 @@ export const TasksEditPage = () => {
       { label: "High", value: "high" },
     ],
   };
+
+  interface UserOption {
+    id: string;
+    name: string;
+    email: string;
+  }
+
+  const [assigneeOptions, setAssigneeOptions] = useState<UserOption[]>([]);
+
+  const fetchUsers = async (query: string) => {
+    const res = await fetch(`http://localhost:3000/users?email_like=${query}`);
+    const data = await res.json();
+    setAssigneeOptions(data);
+  };
+
+  const debounceFetcher = useMemo(() => debounce(fetchUsers, 400), []);
+  useEffect(() => {
+  fetchUsers(""); // nạp tất cả user để hiển thị được assignee đã lưu
+}, []);
 
   return (
     <Modal
@@ -316,6 +337,105 @@ export const TasksEditPage = () => {
             </Col>
           </Row>
         </Card>
+
+        {/* subtask */}
+        <Form.List name="subtasks">
+          {(fields) => (
+            <>
+              <Typography.Title level={5}>Nhiệm vụ con</Typography.Title>
+              <div
+                style={{
+                  border: "1px solid #d9d9d9",
+                  borderRadius: 8,
+                  padding: 16,
+                  backgroundColor: "#fafafa",
+                }}
+              >
+                {fields.map(({ key, name }) => (
+                  <div
+                    key={key}
+                    style={{
+                      marginBottom: 24,
+                      padding: 16,
+                      border: "1px dashed #d0d0d0",
+                      borderRadius: 8,
+                      backgroundColor: "#fff",
+                    }}
+                  >
+                    {/* Tiêu đề nhiệm vụ */}
+                    <Form.Item
+                      name={[name, "title"]}
+                      label="Tiêu đề nhiệm vụ"
+                      style={{ marginBottom: 16 }}
+                    >
+                      <Input placeholder="Nhập tiêu đề nhiệm vụ con" />
+                    </Form.Item>
+
+                    <Row gutter={16}>
+                      {/* Người thực hiện */}
+                      <Col span={12}>
+                        <Form.Item
+                          name={[name, "assignee"]}
+                          label="Người thực hiện"
+                        >
+                          <Select
+                            showSearch
+                            placeholder="Tìm theo email"
+                            onSearch={(value) => debounceFetcher(value)}
+                            filterOption={false}
+                            options={assigneeOptions.map((user) => ({
+                              label: `${user.name} (${user.email})`,
+                              value: user.email, // ✅ phải là email!
+                            }))}
+                          />
+                        </Form.Item>
+                      </Col>
+
+                      {/* Ngày bắt đầu */}
+                      <Col span={6}>
+                        <Form.Item
+                          name={[name, "startDate"]}
+                          label="Ngày bắt đầu"
+                        >
+                          <Input type="date" />
+                        </Form.Item>
+                      </Col>
+
+                      {/* Ngày kết thúc */}
+                      <Col span={6}>
+                        <Form.Item
+                          name={[name, "endDate"]}
+                          label="Ngày kết thúc"
+                        >
+                          <Input type="date" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+
+                    <Row gutter={16}>
+                      {/* Mức độ ưu tiên */}
+                      <Col span={8}>
+                        <Form.Item
+                          name={[name, "priority"]}
+                          label="Mức độ ưu tiên"
+                        >
+                          <Select
+                            placeholder="Chọn mức độ"
+                            options={[
+                              { label: "Thấp", value: "low" },
+                              { label: "Trung bình", value: "medium" },
+                              { label: "Cao", value: "high" },
+                            ]}
+                          />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </Form.List>
       </Form>
     </Modal>
   );
