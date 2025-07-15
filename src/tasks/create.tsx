@@ -17,7 +17,7 @@ import {
   Upload,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import type { SelectProps } from "antd";
 import { TaskFormValues } from "../types/Task";
 import { debounce } from "lodash";
@@ -115,6 +115,10 @@ export const TasksCreatePage = () => {
 
   type AssigneeOption = { userId: string; [key: string]: any };
   const [assigneeOptions, setAssigneeOptions] = useState<AssigneeOption[]>([]);
+  const [usedIndexes, setUsedIndexes] = useState<number[]>([1]);
+
+  // Ref for subtask counter
+  const taskCounterRef = useRef(1);
 
   const fetchUsers = async (query: string) => {
     try {
@@ -130,6 +134,13 @@ export const TasksCreatePage = () => {
 
   // Debounce API call (chỉ gọi khi user ngừng nhập 400ms)
   const debounceFetcher = useMemo(() => debounce(fetchUsers, 400), []);
+  const getNextIndex = () => {
+    let i = 1;
+    while (usedIndexes.includes(i)) {
+      i++;
+    }
+    return i;
+  };
   return (
     <Modal
       {...modalProps}
@@ -164,6 +175,15 @@ export const TasksCreatePage = () => {
         initialValues={{
           priority: "low",
           semester: defaultSemesterValue,
+          subtasks: [
+            {
+              title: "Nhiệm vụ 1",
+              assignee: null,
+              startDate: "",
+              endDate: "",
+              priority: "medium",
+            },
+          ],
         }}
         onValuesChange={(
           changedValues: Partial<TaskFormValues>,
@@ -319,7 +339,6 @@ export const TasksCreatePage = () => {
         <Form.List
           name="subtasks"
           initialValue={[
-
             {
               title: "",
               assignee: null,
@@ -354,14 +373,33 @@ export const TasksCreatePage = () => {
                     <Row justify="space-between" align="middle">
                       <Col>
                         <Typography.Text strong>
-                          Nhiệm vụ {key + 1}
+                          {formProps.form?.getFieldValue([
+                            "subtasks",
+                            name,
+                            "title",
+                          ]) || `Nhiệm vụ`}
                         </Typography.Text>
                       </Col>
                       <Col>
                         <Button
                           danger
                           size="small"
-                          onClick={() => remove(name)}
+                          onClick={() => {
+                            const title = formProps.form?.getFieldValue([
+                              "subtasks",
+                              name,
+                              "title",
+                            ]);
+                            const num = parseInt(
+                              title?.replace("Nhiệm vụ ", "")
+                            );
+                            if (!isNaN(num)) {
+                              setUsedIndexes((prev) =>
+                                prev.filter((n) => n !== num)
+                              );
+                            }
+                            remove(name);
+                          }}
                         >
                           Xóa
                         </Button>
@@ -423,15 +461,17 @@ export const TasksCreatePage = () => {
 
                 <Button
                   type="dashed"
-                  onClick={() =>
+                  onClick={() => {
+                    const next = getNextIndex();
                     add({
-                      title: "",
+                      title: `Nhiệm vụ ${next}`,
                       assignee: null,
                       startDate: "",
                       endDate: "",
                       priority: "medium",
-                    })
-                  }
+                    });
+                    setUsedIndexes((prev) => [...prev, next]);
+                  }}
                   block
                 >
                   + Thêm nhiệm vụ con
