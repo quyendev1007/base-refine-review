@@ -128,6 +128,7 @@ export const TasksEditPage = () => {
   }
 
   const [assigneeOptions, setAssigneeOptions] = useState<UserOption[]>([]);
+   const [usedIndexes, setUsedIndexes] = useState<number[]>([1]);
 
   const fetchUsers = async (query: string) => {
     const res = await fetch(`http://localhost:3000/users?email_like=${query}`);
@@ -139,6 +140,13 @@ export const TasksEditPage = () => {
   useEffect(() => {
     fetchUsers(""); // nạp tất cả user để hiển thị được assignee đã lưu
   }, []);
+  const getNextIndex = () => {
+    let i = 1;
+    while (usedIndexes.includes(i)) {
+      i++;
+    }
+    return i;
+  };
 
   return (
     <Modal
@@ -171,6 +179,15 @@ export const TasksEditPage = () => {
           assignees: formProps.initialValues?.assignees?.map(
             (a: any) => a.userId
           ),
+           subtasks: [
+            {
+              title: "Nhiệm vụ 1",
+              assignee: null,
+              startDate: "",
+              endDate: "",
+              priority: "medium",
+            },
+          ],
         }}
         onValuesChange={(
           changedValues: Partial<TaskFormValues>,
@@ -343,39 +360,30 @@ export const TasksEditPage = () => {
           name="subtasks"
           
         >
-          {(fields, { add, remove }) => (
+           {(fields, { add, remove }) => (
             <>
               <Typography.Title level={5}>Nhiệm vụ con</Typography.Title>
-              <div
-                style={{
-                  border: "1px solid #d9d9d9",
-                  borderRadius: 8,
-                  padding: 16,
-                  backgroundColor: "#fafafa",
-                }}
-              >
+              <div style={{ border: "1px solid #d9d9d9", borderRadius: 8, padding: 16, backgroundColor: "#fafafa" }}>
                 {fields.map(({ key, name }) => (
-                  <div
-                    key={key}
-                    style={{
-                      marginBottom: 24,
-                      padding: 16,
-                      border: "1px dashed #d0d0d0",
-                      borderRadius: 8,
-                      backgroundColor: "#fff",
-                    }}
-                  >
+                  <div key={key} style={{ marginBottom: 24, padding: 16, border: "1px dashed #d0d0d0", borderRadius: 8, backgroundColor: "#fff" }}>
                     <Row justify="space-between" align="middle">
                       <Col>
                         <Typography.Text strong>
-                          Nhiệm vụ {key + 1}
+                          {formProps.form?.getFieldValue(["subtasks", name, "title"]) || `Nhiệm vụ`}
                         </Typography.Text>
                       </Col>
                       <Col>
                         <Button
                           danger
                           size="small"
-                          onClick={() => remove(name)}
+                          onClick={() => {
+                            const title = formProps.form?.getFieldValue(["subtasks", name, "title"]);
+                            const num = parseInt(title?.replace("Nhiệm vụ ", ""));
+                            if (!isNaN(num)) {
+                              setUsedIndexes((prev) => prev.filter((n) => n !== num));
+                            }
+                            remove(name);
+                          }}
                         >
                           Xóa
                         </Button>
@@ -435,17 +443,19 @@ export const TasksEditPage = () => {
                   </div>
                 ))}
 
-                <Button
+               <Button
                   type="dashed"
-                  onClick={() =>
+                  onClick={() => {
+                    const next = getNextIndex();
                     add({
-                      title: "",
+                      title: `Nhiệm vụ ${next}`,
                       assignee: null,
                       startDate: "",
                       endDate: "",
                       priority: "medium",
-                    })
-                  }
+                    });
+                    setUsedIndexes((prev) => [...prev, next]);
+                  }}
                   block
                 >
                   + Thêm nhiệm vụ con
