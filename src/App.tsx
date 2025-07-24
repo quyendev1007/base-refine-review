@@ -39,7 +39,7 @@ import {
 } from "./pages/categories";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { Header } from "./components/header";
-import { Login } from "./pages/login";
+import { LoginPage } from "./pages/login";
 import { Register } from "./pages/register";
 import { ForgotPassword } from "./pages/forgotPassword";
 import { authProvider } from "./authProvider";
@@ -53,6 +53,10 @@ import { ProductOutlined } from "@ant-design/icons";
 import TasksListPage from "./tasks";
 import { TasksCreatePage } from "./tasks/create";
 import { TasksEditPage } from "./tasks/edit";
+import UserList from "./pages/users/list";
+import UserCreate from "./pages/users/create";
+import UserEdit from "./pages/users/edit";
+import UserShow from "./pages/users/show";
 
 function App() {
   return (
@@ -84,6 +88,17 @@ function App() {
                     create: "/tasks/new",
                     edit: "/tasks/edit/:id",
                     show: "/tasks/show/:id",
+                    meta: {
+                      canDelete: true,
+                      icon: <ProductOutlined />,
+                    },
+                  },
+                  {
+                    name: "users",
+                    list: "/users",
+                    create: "/users/create",
+                    edit: "/users/edit/:id",
+                    show: "/users/show/:id",
                     meta: {
                       canDelete: true,
                       icon: <ProductOutlined />,
@@ -130,7 +145,7 @@ function App() {
                         >
                           <Outlet />
                         </ThemedLayoutV2>
-                      </Authenticated>
+                      // </Authenticated>
                     }
                   >
                     <Route
@@ -150,6 +165,12 @@ function App() {
                       {/*
 
                       <Route path="show/:id" element={<TaskShow />} /> */}
+                    </Route>
+                    <Route path="/users">
+                      <Route index element={<UserList />} />
+                      <Route path="create" element={<UserCreate />} />
+                      <Route path="edit/:id" element={<UserEdit />} />
+                      <Route path="show/:id" element={<UserShow />} />
                     </Route>
                     {/* <Route path="/blog-posts">
                       <Route index element={<BlogPostList />} />
@@ -172,10 +193,10 @@ function App() {
                         fallback={<Outlet />}
                       >
                         <NavigateToResource />
-                      </Authenticated>
+                      // </Authenticated>
                     }
                   >
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<Register />} />
                     <Route
                       path="/forgot-password"

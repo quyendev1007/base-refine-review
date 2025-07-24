@@ -132,7 +132,7 @@
       "createdAt": "2024-09-08T15:31:33.223Z",
       "updatedAt": "2025-07-04T04:17:55.840Z",
       "completed": false,
-      "stageId": null,
+      "stageId": 1,
       "users": [
         {
           "id": 5,
@@ -153,7 +153,7 @@
       "title": "new 002 edit ",
       "description": "new description",
       "dueDate": "2025-07-18",
-      "stageId": 1,
+      "stageId": 2,
       "userIds": [],
       "complete": false,
       "createdAt": "2025-07-04T12:10:45.956Z",
@@ -186,7 +186,7 @@
       "title": "new card lkjashjkdkasdkljaskdllk",
       "description": "asdkasdjkl",
       "dueDate": "2025-07-18",
-      "stageId": 2,
+      "stageId": null,
       "userIds": [],
       "complete": false,
       "createdAt": "2025-07-04T12:20:46.411Z",
@@ -212,5 +212,7 @@
       "title": "Done"
     }
   ],
-  "users": []
+  "users": [
+    
+  ]
 }
