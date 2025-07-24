@@ -49,7 +49,7 @@ import {
   ProductList,
   ProductShow,
 } from "./pages/products";
-import { ProductOutlined } from "@ant-design/icons";
+import { ProductOutlined, UserOutlined } from "@ant-design/icons";
 import TasksListPage from "./tasks";
 import { TasksCreatePage } from "./tasks/create";
 import { TasksEditPage } from "./tasks/edit";
@@ -71,6 +71,15 @@ function App() {
                 routerProvider={routerBindings}
                 authProvider={authProvider}
                 resources={[
+                  {
+                    name: "users",
+                    list: "/users",
+                    edit: "/users/edit/:id",
+                    meta: {
+                      // canDelete: true,
+                      icon: <UserOutlined />,
+                    },
+                  },
                   {
                     name: "products",
                     list: "/products",
@@ -152,6 +161,10 @@ function App() {
                       index
                       element={<NavigateToResource resource="tasks" />}
                     />
+                    <Route path="/users">
+                      <Route index element={<UserList />} />
+                      <Route path="edit/:id" element={<UserEdit />} />
+                    </Route>
                     <Route path="/products">
                       <Route index element={<ProductList />} />
                       <Route path="create" element={<ProductCreate />} />

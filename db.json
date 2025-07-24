@@ -1,218 +1,259 @@
 {
-  "products": [
+  "users": [
     {
-      "id": 1,
-      "name": "Product 233",
-      "description": "This is product 1",
-      "image": "https://example.com/product1.jpg",
-      "price": 100
+      "id": "u1",
+      "name": "Nguyễn Văn A",
+      "email": "a@example.com",
+      "role": "TM",
+      "permissions": [
+        "create",
+        "update",
+        "assign",
+        "delete",
+        "read"
+      ]
     },
     {
-      "id": 2,
-      "name": "Product 2",
-      "description": "This is product 2",
-      "image": "https://example.com/product2.jpg",
-      "price": 200
-    },
-    {
-      "name": "new pro",
-      "description": "new pro",
-      "price": "123123",
-      "id": 3
+      "id": "u2",
+      "name": "Trần Thị B",
+      "email": "b@example.com",
+      "role": "Student",
+      "permissions": [
+        "read"
+      ]
     }
   ],
+  "semesters": [],
   "tasks": [
     {
-      "id": 1,
-      "title": "Develop Mobile App Prototype",
-      "description": "In this task, you will lead the development of a mobile app prototype based on the product requirements and design specifications.",
-      "dueDate": "2024-11-10T05:25:44.051Z",
-      "createdAt": "2024-09-08T15:31:33.223Z",
-      "updatedAt": "2025-07-04T04:17:55.840Z",
-      "completed": false,
-      "stageId": 3,
-      "users": [
+      "id": "t1",
+      "title": "Chuẩn bị tài liệu môn học",
+      "description": "Tài liệu dành cho tuần 1",
+      "startDate": "2025-01-15",
+      "endDate": "2025-01-26",
+      "priority": "medium",
+      "status": "Completed",
+      "createdBy": "u2",
+      "semester": "2025-Spring",
+      "blockName": "Block 1",
+      "file": "https://example.com/week1.pdf",
+      "link": "https://example.com/lecture1",
+      "assignees": [
         {
-          "id": 5,
-          "name": "Dwight Schrute",
-          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Design User Interface for Web Application",
-      "description": "In this task, you will create a user-friendly and visually appealing user interface (UI) for our web application.",
-      "dueDate": "2024-11-10T05:25:44.051Z",
-      "createdAt": "2024-09-08T15:31:33.223Z",
-      "updatedAt": "2025-07-04T04:17:55.840Z",
-      "completed": false,
-      "stageId": 1,
-      "users": [
+          "response": "",
+          "progress": 0
+        },
         {
-          "id": 5,
-          "name": "Dwight Schrute",
-          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "title": "Implement Backend API for Mobile App",
-      "description": "In this task, you will develop the backend API for our mobile app, ensuring it meets the functional and performance requirements.",
-      "dueDate": "2024-11-10T05:25:44.051Z",
-      "createdAt": "2024-09-08T15:31:33.223Z",
-      "updatedAt": "2025-07-04T04:17:55.840Z",
-      "completed": false,
-      "stageId": 3,
-      "users": [
+          "userId": "u1",
+          "response": "",
+          "progress": 0
+        },
         {
-          "id": 5,
-          "name": "Dwight Schrute",
-          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
+          "userId": "u2",
+          "response": "",
+          "progress": 0
         }
-      ]
+      ],
+      "stageId": "st1",
+      "estimate": "40"
     },
     {
-      "id": 4,
-      "title": "Conduct Code Review for Mobile App",
-      "description": "In this task, you will review the codebase of our mobile app to ensure it meets the coding standards and best practices.",
-      "dueDate": "2024-11-10T05:25:44.051Z",
-      "createdAt": "2024-09-08T15:31:33.223Z",
-      "updatedAt": "2025-07-04T04:17:55.840Z",
-      "completed": false,
-      "stageId": 4,
-      "users": [
-        {
-          "id": 5,
-          "name": "Dwight Schrute",
-          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "title": "Deploy Mobile App to Production",
-      "description": "In this task, you will deploy our mobile app to the production environment, ensuring it is ready for public use.",
-      "dueDate": "2024-11-10T05:25:44.051Z",
-      "createdAt": "2024-09-08T15:31:33.223Z",
-      "updatedAt": "2025-07-04T04:17:55.840Z",
-      "completed": false,
-      "stageId": null,
-      "users": [
-        {
-          "id": 5,
-          "name": "Dwight Schrute",
-          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "title": "Test Mobile App Functionality",
-      "description": "In this task, you will test the functionality of our mobile app to ensure it meets the requirements and provides a seamless user experience.",
-      "dueDate": "2024-11-10T05:25:44.051Z",
-      "createdAt": "2024-09-08T15:31:33.223Z",
-      "updatedAt": "2025-07-04T04:17:55.840Z",
-      "completed": false,
-      "stageId": 2,
-      "users": [
-        {
-          "id": 5,
-          "name": "Dwight Schrute",
-          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
-        }
-      ]
-    },
-    {
-      "id": 7,
-      "title": "Gather User Feedback on Mobile App",
-      "description": "In this task, you will gather user feedback on our mobile app to identify areas for improvement and enhance the user experience.",
-      "dueDate": "2024-11-10T05:25:44.051Z",
-      "createdAt": "2024-09-08T15:31:33.223Z",
-      "updatedAt": "2025-07-04T04:17:55.840Z",
-      "completed": false,
-      "stageId": 1,
-      "users": [
-        {
-          "id": 5,
-          "name": "Dwight Schrute",
-          "avatarUrl": "https://refine-crm.ams3.cdn.digitaloceanspaces.com/avatars/4.jpg"
-        }
-      ]
-    },
-    {
-      "title": "new 01",
-      "description": "mota",
-      "dueDate": "2025-07-25",
-      "stageId": null,
-      "userIds": [],
-      "id": 9
-    },
-    {
-      "title": "new 002 edit ",
-      "description": "new description",
-      "dueDate": "2025-07-18",
-      "stageId": 2,
+      "title": "abc",
+      "description": "abc",
+      "startDate": "2025-07-13",
+      "endDate": "2025-07-06",
+      "stageId": "st3",
       "userIds": [],
       "complete": false,
-      "createdAt": "2025-07-04T12:10:45.956Z",
-      "updatedAt": "2025-07-04T12:10:45.956Z",
-      "id": 10
+      "createdAt": "2025-07-05T08:09:23.038Z",
+      "updatedAt": "2025-07-05T08:09:23.038Z",
+      "id": "M1iVxnn",
+      "priority": "low",
+      "semester": "2025-Summer",
+      "estimate": "40",
+      "assignees": [
+        {
+          "userId": "u2",
+          "response": "",
+          "progress": 0
+        }
+      ]
     },
     {
-      "title": "new 003",
-      "description": "new description 003",
-      "dueDate": "2025-07-18",
-      "stageId": 2,
-      "userIds": [],
-      "complete": false,
-      "createdAt": "2025-07-04T12:13:50.657Z",
-      "updatedAt": "2025-07-04T12:13:50.657Z",
-      "id": 11
-    },
-    {
-      "title": "new card",
-      "description": "description card",
-      "dueDate": "2025-07-25",
-      "stageId": 1,
-      "userIds": [],
-      "complete": false,
-      "createdAt": "2025-07-04T12:20:20.218Z",
-      "updatedAt": "2025-07-04T12:20:20.218Z",
-      "id": 12
-    },
-    {
-      "title": "new card lkjashjkdkasdkljaskdllk",
-      "description": "asdkasdjkl",
-      "dueDate": "2025-07-18",
+      "title": "cong viec",
+      "description": "mo ta",
+      "startDate": "2026-01-03",
+      "endDate": "2026-09-20",
+      "estimate": "40",
+      "semester": "2026-Summer",
+      "assignees": [
+        {
+          "userId": "u1",
+          "response": "",
+          "progress": 0
+        },
+        {
+          "userId": "u2",
+          "response": "",
+          "progress": 0
+        }
+      ],
+      "priority": "medium",
       "stageId": null,
       "userIds": [],
       "complete": false,
-      "createdAt": "2025-07-04T12:20:46.411Z",
-      "updatedAt": "2025-07-04T12:20:46.411Z",
-      "id": 13
+      "createdAt": "2025-07-06T03:58:15.468Z",
+      "updatedAt": "2025-07-06T03:58:15.468Z",
+      "id": "MjlbYkv"
+    },
+    {
+      "title": "abc",
+      "description": "abc",
+      "startDate": "2025-06-14",
+      "endDate": "2025-07-20",
+      "estimate": "40",
+      "semester": "2025-Summer",
+      "assignees": [
+        {
+          "userId": "u1",
+          "response": "",
+          "progress": 0
+        }
+      ],
+      "priority": "low",
+      "stageId": "st3",
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-06T04:07:11.782Z",
+      "updatedAt": "2025-07-06T04:07:11.782Z",
+      "id": "9cje9K9"
+    },
+    {
+      "title": "Eum Et Iusto1",
+      "description": "adasdsadasdasda",
+      "startDate": "2025-07-03",
+      "endDate": "2025-07-25",
+      "estimate": "16",
+      "semester": "2025-Summer",
+      "assignees": [
+        {
+          "userId": "u1",
+          "response": "",
+          "progress": 0
+        }
+      ],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "title": "công việc 1",
+          "assignee": "u1",
+          "startDate": "2025-07-29",
+          "endDate": "",
+          "priority": "medium"
+        }
+      ],
+      "stageId": null,
+      "userIds": [],
+      "complete": false,
+      "createdAt": "2025-07-13T10:59:56.099Z",
+      "updatedAt": "2025-07-13T10:59:56.099Z",
+      "id": "NGRzzUW"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "n1",
+      "userId": "u2",
+      "message": "Bạn có hoạt động bắt buộc ngày 20/01/2025",
+      "type": "Reminder",
+      "readStatus": false,
+      "isDeleted": false
     }
   ],
   "stages": [
     {
-      "id": 1,
-      "title": "TODO"
+      "id": "st1",
+      "title": "Chờ xử lý"
     },
     {
-      "id": 2,
-      "title": "In Progress"
+      "id": "st2",
+      "title": "Đang thực hiện"
     },
     {
-      "id": 3,
-      "title": "Review"
-    },
-    {
-      "id": 4,
-      "title": "Done"
+      "id": "st3",
+      "title": "Hoàn thành"
     }
   ],
-  "users": [
-    
+  "activities": [
+    {
+      "id": "a1",
+      "name": "Workshop Kỹ năng mềm",
+      "type": "event",
+      "description": "Hội thảo chia sẻ kỹ năng làm việc nhóm",
+      "priority": "medium",
+      "stages": "st2",
+      "start_time": "2025-02-15T09:00:00Z",
+      "end_time": "2025-02-15T11:30:00Z",
+      "location": "Hội trường A",
+      "online_link": "",
+      "mandatory": true,
+      "category": "workshop",
+      "created_by": "u1",
+      "created_at": "2025-01-05T10:00:00Z",
+      "updated_at": "2025-01-10T12:00:00Z"
+    },
+    {
+      "id": "a2",
+      "name": "Bài tập nhóm môn Web",
+      "type": "task",
+      "description": "Phân công task dự án nhóm",
+      "priority": "high",
+      "stages": "st1",
+      "start_time": "2025-02-01T00:00:00Z",
+      "end_time": "2025-02-28T23:59:59Z",
+      "mandatory": false,
+      "created_by": "u2",
+      "created_at": "2025-01-20T08:30:00Z",
+      "updated_at": "2025-01-21T09:00:00Z"
+    }
+  ],
+  "activity_participants": [
+    {
+      "id": "ap1",
+      "activity_id": "a1",
+      "user_id": "u2",
+      "role": "participant",
+      "status": "joined"
+    },
+    {
+      "id": "ap2",
+      "activity_id": "a2",
+      "user_id": "u1",
+      "role": "executor",
+      "status": "accepted"
+    }
+  ],
+  "activity_files": [
+    {
+      "id": "f1",
+      "activity_id": "a1",
+      "file_url": "https://example.com/kynangmem.pdf",
+      "file_name": "kynangmem.pdf"
+    },
+    {
+      "id": "f2",
+      "activity_id": "a2",
+      "file_url": "https://example.com/task-web.docx",
+      "file_name": "task-web.docx"
+    }
+  ],
+  "activity_feedback": [
+    {
+      "id": "fb1",
+      "activity_id": "a1",
+      "user_id": "u2",
+      "content": "Nội dung workshop rất bổ ích, giúp mình cải thiện kỹ năng nhóm.",
+      "submitted_at": "2025-02-15T13:00:00Z"
+    }
   ]
 }
