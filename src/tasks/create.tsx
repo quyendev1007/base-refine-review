@@ -316,21 +316,11 @@ export const TasksCreatePage = () => {
           </Row>
         </Card>
         {/* subtask */}
-        <Form.List
-          name="subtasks"
-          initialValue={[
-            {
-              title: "",
-              assignee: null,
-              startDate: "",
-              endDate: "",
-              priority: "medium",
-            },
-          ]}
-        >
-          {(fields) => (
+        <Form.List name="subtasks">
+          {(fields, { add, remove }) => (
             <>
               <Typography.Title level={5}>Nhiệm vụ con</Typography.Title>
+
               <div
                 style={{
                   border: "1px solid #d9d9d9",
@@ -339,6 +329,14 @@ export const TasksCreatePage = () => {
                   backgroundColor: "#fafafa",
                 }}
               >
+                {fields.length === 0 && (
+                  <div style={{ textAlign: "center", marginBottom: 12 }}>
+                    <Typography.Text type="secondary">
+                      Chưa có nhiệm vụ con nào được thêm.
+                    </Typography.Text>
+                  </div>
+                )}
+
                 {fields.map(({ key, name }) => (
                   <div
                     key={key}
@@ -350,81 +348,86 @@ export const TasksCreatePage = () => {
                       backgroundColor: "#fff",
                     }}
                   >
-                    {/* Title riêng dòng */}
-                    <Form.Item
-                      name={[name, "title"]}
-                      style={{ marginBottom: 16 }}
-                      label="Tiêu đề nhiệm vụ"
-                    >
+                    <Row justify="space-between" align="middle">
+                      <Col>
+                        <Typography.Text strong>
+                          Nhiệm vụ {key + 1}
+                        </Typography.Text>
+                      </Col>
+                      <Col>
+                        <Button
+                          danger
+                          size="small"
+                          onClick={() => remove(name)}
+                        >
+                          Xóa
+                        </Button>
+                      </Col>
+                    </Row>
+
+                    <Form.Item name={[name, "title"]} label="Tiêu đề nhiệm vụ">
                       <Input placeholder="Nhập tiêu đề nhiệm vụ con" />
                     </Form.Item>
 
-                    {/* Dòng chứa các trường còn lại */}
                     <Row gutter={16}>
                       <Col span={12}>
                         <Form.Item
-                          label="Người thực hiện"
                           name={[name, "assignee"]}
-                          rules={[]}
+                          label="Người thực hiện"
                         >
                           <Select
                             showSearch
-                            placeholder="Chọn hoặc tìm theo email"
-                            optionFilterProp="label"
-                            filterOption={(input, option) =>
-                              (option?.label ?? "")
-                                .toLowerCase()
-                                .includes(input.toLowerCase())
-                            }
-                            options={users?.data?.map((user) => ({
-                              label: user.name + " (" + user.email + ")",
-                              value: user.id,
-                            }))}
+                            placeholder="Tìm theo email"
+                            // Thêm logic lọc ở đây nếu cần
                           />
                         </Form.Item>
                       </Col>
-
                       <Col span={6}>
                         <Form.Item
-                          label="Ngày bắt đầu"
                           name={[name, "startDate"]}
-                          rules={[]}
+                          label="Ngày bắt đầu"
                         >
                           <Input type="date" />
                         </Form.Item>
                       </Col>
-
                       <Col span={6}>
                         <Form.Item
-                          label="Ngày kết thúc"
                           name={[name, "endDate"]}
-                          rules={[]}
+                          label="Ngày kết thúc"
                         >
                           <Input type="date" />
                         </Form.Item>
                       </Col>
                     </Row>
 
-                    <Row gutter={16}>
-                      <Col span={8}>
-                        <Form.Item
-                          label="Mức độ ưu tiên"
-                          name={[name, "priority"]}
-                          rules={[]}
-                        >
-                          <Select
-                            placeholder="Chọn mức độ"
-                            options={[
-                              { label: "Thấp", value: "low" },
-                              { label: "Trung bình", value: "medium" },
-                              { label: "Cao", value: "high" },
-                            ]}
-                          />
-                        </Form.Item>
-                      </Col>
-                    </Row>
+                    <Form.Item name={[name, "priority"]} label="Mức độ ưu tiên">
+                      <Select
+                        placeholder="Chọn mức độ"
+                        options={[
+                          { label: "Thấp", value: "low" },
+                          { label: "Trung bình", value: "medium" },
+                          { label: "Cao", value: "high" },
+                        ]}
+                      />
+                    </Form.Item>
                   </div>
                 ))}
+
+                <Button
+                  type="dashed"
+                  onClick={() =>
+                    add({
+                      title: "",
+                      assignee: null,
+                      startDate: "",
+                      endDate: "",
+                      priority: "medium",
+                    })
+                  }
+                  block
+                >
+                  + Thêm nhiệm vụ con
+                </Button>
               </div>
             </>
           )}
