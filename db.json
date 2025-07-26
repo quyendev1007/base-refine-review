@@ -105,15 +105,7 @@
       "createdAt": "2025-07-06T03:58:15.468Z",
       "updatedAt": "2025-07-06T03:58:15.468Z",
       "id": "MjlbYkv",
-      "subtasks": [
-        {
-          "title": "công việc 1",
-          "assignee": "a@example.com",
-          "startDate": "",
-          "endDate": "",
-          "priority": "low"
-        }
-      ]
+      "subtasks": []
     },
     {
       "title": "abc",
